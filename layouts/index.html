@@ -1,4 +1,49 @@
-{{ define "main" }}<section class="hero"><div><p class="eyebrow">{{ .Params.eyebrow }}</p><h1>José Brotons<br><em>Pomares</em></h1><h2>{{ .Params.headline }}</h2><p class="intro">{{ .Params.intro }}</p><div class="actions"><a class="btn primary" href="{{ relLangURL "/projects/" }}">{{ .Params.projectsCTA }}</a><a class="btn" href="{{ relLangURL "/cv/" }}">{{ .Params.cvCTA }}</a></div><div class="micro"><span>UMH · Biotechnology</span><span>Clinical Research & CRO</span><span>ES · EN</span></div></div><div class="portrait-shell"><img src="{{ site.Params.photo }}" alt="Fotografía profesional de José Brotons Pomares"><div class="portrait-note">{{ .Params.note }}</div></div></section>
-<section class="block"><div class="block-title"><small>01</small><h2>{{ .Params.focusTitle }}</h2></div><div class="three">{{ range .Params.focus }}<article><span>{{ .number }}</span><h3>{{ .title }}</h3><p>{{ .text }}</p></article>{{ end }}</div></section>
-<section class="block projects-preview"><div class="block-title"><small>02</small><h2>{{ .Params.projectsTitle }}</h2></div><div class="cards">{{ range first 3 (where site.RegularPages "Section" "projects") }}<article><div><span class="pill">{{ .Params.type }}</span><h3>{{ .Title }}</h3><p>{{ .Description }}</p></div><a href="{{ .RelPermalink }}">{{ $.Params.openProject }} <b>↗</b></a></article>{{ end }}</div></section>
-<section class="cta"><div><small>{{ .Params.cvLabel }}</small><h2>{{ .Params.cvTitle }}</h2><p>{{ .Params.cvText }}</p></div><a class="btn light" href="{{ relLangURL "/cv/" }}">{{ .Params.cvCTA }}</a></section>{{ end }}
+{{ define "main" }}
+<section class="hero">
+  <div>
+    <p class="eyebrow">{{ .Params.eyebrow }}</p>
+    <h1>José Brotons<br><em>Pomares</em></h1>
+    <h2>{{ .Params.headline }}</h2>
+    <p class="intro">{{ .Params.intro }}</p>
+    <div class="actions">
+      <a class="btn primary" href="{{ relLangURL "/projects/" }}">{{ .Params.projectscta | default "Explorar proyectos" }}</a>
+      <a class="btn" href="{{ relLangURL "/cv/" }}">{{ .Params.cvcta | default "Consultar CV" }}</a>
+    </div>
+    <div class="micro">
+      <span>UMH · Biotechnology</span>
+      <span>Clinical Research & CRO</span>
+      <span>ES · EN</span>
+    </div>
+  </div>
+  <div class="portrait-shell">
+    <img src="{{ site.Params.photo }}" alt="Fotografía profesional de José Brotons Pomares">
+    <div class="portrait-note">{{ .Params.note }}</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="block-title"><small>01</small><h2>{{ .Params.focustitle }}</h2></div>
+  <div class="three">
+    {{ range .Params.focus }}
+    <article><span>{{ .number }}</span><h3>{{ .title }}</h3><p>{{ .text }}</p></article>
+    {{ end }}
+  </div>
+</section>
+
+<section class="block projects-preview">
+  <div class="block-title"><small>02</small><h2>{{ .Params.projectstitle }}</h2></div>
+  <div class="cards">
+    {{ range first 3 (where site.RegularPages "Section" "projects") }}
+    <article>
+      <div><span class="pill">{{ .Params.type }}</span><h3>{{ .Title }}</h3><p>{{ .Description }}</p></div>
+      <a href="{{ .RelPermalink }}">{{ $.Params.openproject | default "Ver proyecto" }} <b>↗</b></a>
+    </article>
+    {{ end }}
+  </div>
+</section>
+
+<section class="cta">
+  <div><small>{{ .Params.cvlabel }}</small><h2>{{ .Params.cvtitle }}</h2><p>{{ .Params.cvtext }}</p></div>
+  <a class="btn light" href="{{ relLangURL "/cv/" }}">{{ .Params.cvcta | default "Consultar CV" }}</a>
+</section>
+{{ end }}
