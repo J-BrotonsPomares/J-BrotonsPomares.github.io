@@ -1,0 +1,59 @@
+baseURL = "https://J-BrotonsPomares.github.io/"
+title = "José Brotons Pomares | Clinical Research & Biotechnology"
+defaultContentLanguage = "es"
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+
+[params]
+  author = "José Brotons Pomares"
+  email = "josebrotonspomares@gmail.com"
+  github = "https://github.com/J-BrotonsPomares"
+  photo = "https://github.com/user-attachments/assets/5b15dba4-00cd-41c0-8ee2-1b03696234b5"
+  description = "Portfolio profesional de biotecnología, investigación clínica y operaciones clínicas."
+
+[languages]
+  [languages.es]
+    languageName = "ES"
+    languageCode = "es-ES"
+    contentDir = "content/es"
+    weight = 1
+    [[languages.es.menu.main]]
+      name = "Inicio"
+      pageRef = "/"
+      weight = 1
+    [[languages.es.menu.main]]
+      name = "Proyectos"
+      pageRef = "/projects"
+      weight = 2
+    [[languages.es.menu.main]]
+      name = "Perfil"
+      pageRef = "/profile"
+      weight = 3
+    [[languages.es.menu.main]]
+      name = "CV"
+      pageRef = "/cv"
+      weight = 4
+  [languages.en]
+    languageName = "EN"
+    languageCode = "en-GB"
+    contentDir = "content/en"
+    weight = 2
+    [[languages.en.menu.main]]
+      name = "Home"
+      pageRef = "/"
+      weight = 1
+    [[languages.en.menu.main]]
+      name = "Projects"
+      pageRef = "/projects"
+      weight = 2
+    [[languages.en.menu.main]]
+      name = "Profile"
+      pageRef = "/profile"
+      weight = 3
+    [[languages.en.menu.main]]
+      name = "CV"
+      pageRef = "/cv"
+      weight = 4
+
+[markup.goldmark.renderer]
+  unsafe = true
