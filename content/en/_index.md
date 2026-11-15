@@ -15,4 +15,8 @@ focus:
   - title: "Biotech and pharma"
     text: "Scientific background and laboratory training transferable to related opportunities."
 projectsTitle: "Selected projects"
+openProject: "View project"
+cvLabel: "03 · CURRICULUM VITAE"
+cvTitle: "A candidacy built on verifiable evidence"
+cvText: "Consult or download the 1-page English or Spanish CV summarizing academic training, laboratory placement, and simulated clinical operations deliverables."
 ---
