@@ -1,4 +1,3 @@
-
 ---
 title: "Inicio"
 eyebrow: "BIOTECNOLOGÍA · CLINICAL RESEARCH · LIFE SCIENCES"
