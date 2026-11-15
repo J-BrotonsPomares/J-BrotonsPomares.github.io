@@ -4,10 +4,10 @@
     <p class="eyebrow">{{ .Params.eyebrow }}</p>
     <h1>José Brotons<br><em>Pomares</em></h1>
     <h2>{{ .Params.headline }}</h2>
-    <p class="intro">{{ .Params.intro }}</p>
+    <p class="intro">{{ or .Params.lead .Params.intro }}</p>
     <div class="actions">
-      <a class="btn primary" href="{{ relLangURL "/projects/" }}">{{ .Params.projectscta | default "Explorar proyectos" }}</a>
-      <a class="btn" href="{{ relLangURL "/cv/" }}">{{ .Params.cvcta | default "Consultar CV" }}</a>
+      <a class="btn primary" href="{{ relLangURL "/projects/" }}">{{ or .Params.projectsbutton .Params.projectscta (cond (eq .Lang "en") "Explore projects" "Explorar proyectos") }}</a>
+      <a class="btn" href="{{ relLangURL "/cv/" }}">{{ or .Params.cvbutton .Params.cvcta (cond (eq .Lang "en") "View CV" "Consultar CV") }}</a>
     </div>
     <div class="micro">
       <span>UMH · Biotechnology</span>
@@ -17,7 +17,7 @@
   </div>
   <div class="portrait-shell">
     <img src="{{ site.Params.photo }}" alt="Fotografía profesional de José Brotons Pomares">
-    <div class="portrait-note">{{ .Params.note }}</div>
+    <div class="portrait-note">{{ or .Params.status .Params.note }}</div>
   </div>
 </section>
 
@@ -25,7 +25,7 @@
   <div class="block-title"><small>01</small><h2>{{ .Params.focustitle }}</h2></div>
   <div class="three">
     {{ range .Params.focus }}
-    <article><span>{{ .number }}</span><h3>{{ .title }}</h3><p>{{ .text }}</p></article>
+    <article>{{ with .number }}<span>{{ . }}</span>{{ end }}<h3>{{ .title }}</h3><p>{{ .text }}</p></article>
     {{ end }}
   </div>
 </section>
@@ -33,17 +33,21 @@
 <section class="block projects-preview">
   <div class="block-title"><small>02</small><h2>{{ .Params.projectstitle }}</h2></div>
   <div class="cards">
-    {{ range first 3 (where site.RegularPages "Section" "projects") }}
+    {{ range first 4 (where site.RegularPages "Section" "projects") }}
     <article>
-      <div><span class="pill">{{ .Params.type }}</span><h3>{{ .Title }}</h3><p>{{ .Description }}</p></div>
-      <a href="{{ .RelPermalink }}">{{ $.Params.openproject | default "Ver proyecto" }} <b>↗</b></a>
+      <div><span class="pill">{{ or .Params.type .Params.tag }}</span><h3>{{ .Title }}</h3><p>{{ or .Description .Params.summary }}</p></div>
+      <a href="{{ .RelPermalink }}">{{ or $.Params.openproject (cond (eq $.Lang "en") "View project" "Ver proyecto") }} <b>↗</b></a>
     </article>
     {{ end }}
   </div>
 </section>
 
 <section class="cta">
-  <div><small>{{ .Params.cvlabel }}</small><h2>{{ .Params.cvtitle }}</h2><p>{{ .Params.cvtext }}</p></div>
-  <a class="btn light" href="{{ relLangURL "/cv/" }}">{{ .Params.cvcta | default "Consultar CV" }}</a>
+  <div>
+    <small>{{ or .Params.cvlabel (cond (eq .Lang "en") "03 · CURRICULUM VITAE" "03 · CURRÍCULUM") }}</small>
+    <h2>{{ or .Params.cvtitle (cond (eq .Lang "en") "ATS-ready CV & technical profile" "Una candidatura construida con evidencias") }}</h2>
+    <p>{{ or .Params.cvtext (cond (eq .Lang "en") "Consult or download the 1-page English or Spanish CV summarizing academic training, laboratory placement, and simulated clinical operations deliverables." "Consulta o descarga el CV en español o inglés con mi formación académica, experiencia práctica de laboratorio y evidencias simuladas en operaciones clínicas.") }}</p>
+  </div>
+  <a class="btn light" href="{{ relLangURL "/cv/" }}">{{ or .Params.cvbutton .Params.cvcta (cond (eq .Lang "en") "View CV" "Consultar CV") }}</a>
 </section>
 {{ end }}
